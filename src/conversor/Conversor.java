@@ -48,27 +48,16 @@ public class Conversor {
                     v += (digitos.charAt(digitos.length()-1-i)-'0')*Math.pow(b,i);
                 }
             }else if(b == 16){
-                /* OUTRO MÉTODO
-                if((int)digitos.charAt(s-1-i) > 47 && (int)digitos.charAt(s-1-i) < 58){
-                    v += (digitos.charAt(s-1-i)-'0')*Math.pow(b,i);
-                }
-                if(((int) digitos.charAt(s-1-i) > 64) && ((int) digitos.charAt(s-1-i) < 71)){
-                    v += ((int)digitos.charAt(s-1-i)-55)*Math.pow(b,i);
-                }*/
                 if(digitos.charAt(0) == 'F'){
                     if(digitos.charAt(digitos.length()-1-i)-'0' > 9){
                         v += (15 - (digitos.charAt(digitos.length()-1-i)-'7'))*Math.pow(b,i);
                     }else
                         v += (15 - (digitos.charAt(digitos.length()-1-i)-'0'))*Math.pow(b,i);
                 }else{
-                    for (int k = 10; k < b; k++){
-                        if((int)digitos.charAt(digitos.length()-1-i) - k == 55){
-                            v += k*Math.pow(b, i);
-                            break;
-                        }else{
-                            v += (digitos.charAt(digitos.length()-1-i)-'0')*Math.pow(b,i);
-                            break;
-                        }
+                    if(digitos.charAt(digitos.length()-1-i) - '7' > 9){
+                        v += (digitos.charAt(digitos.length()-1-i) - '7')*Math.pow(b, i);
+                    }else{
+                        v += (digitos.charAt(digitos.length()-1-i)-'0')*Math.pow(b,i);
                     }
                 }
             }else{
@@ -93,10 +82,10 @@ public class Conversor {
                 digitos = String.valueOf(valor%b) + digitos;
             }
             if(digitos.length() < 32) {
-                for(int i = 0; i < 32;i++) {
-                    digitos = "0"+digitos;
-                }
-            }
+        	for(int j = 0; j < 32 - digitos.length();) {
+        		digitos = "0"+digitos;
+        	}
+        }
             if((valor < 0)) {
                 for(int i = 0; i < digitos.length();i++){
                     if(b == 2){
@@ -135,7 +124,7 @@ public class Conversor {
     
     public static void main(String[] args){
         System.out.println(converterDecimalParaBase(-92, 16));
-        System.out.println(converterBaseParaDecimal("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA3", 16));
+        System.out.println(converterBaseParaDecimal("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA3", 16));
     }
     
 }
